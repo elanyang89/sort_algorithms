@@ -100,8 +100,8 @@ public class Nodeinfo{
     					break;
     				}
     			}
+                break;
     		}
-    		break;
     	}
     	return tmp;
     }

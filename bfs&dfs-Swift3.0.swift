@@ -1,22 +1,11 @@
-import UIKit
-
 class BFSDFSSearch : NSObject{
     
-    public class Node {
+    class Node {
         var isVisited : Bool
         var nodeName : String?
         init(name : String) {
             isVisited = false
             nodeName = name
-        }
-        func setVisited(visited : Bool) -> Void {
-            self.isVisited = visited;
-        }
-        func getVisited() -> Bool {
-            return isVisited
-        }
-        func getNodeName() -> String {
-            return nodeName!
         }
     }
     
@@ -49,14 +38,14 @@ class BFSDFSSearch : NSObject{
     
     func bfs_search(root : Node) -> Void {
         var queue : Array<Node>?
-        root.setVisited(visited: true)
+        root.isVisited = true
         queue?.append(root)
         
         while queue?.count != 0 {
             let node = queue?.first
             let child = getAdjacentNode(aNode: node!)
             if (child != nil) {
-                child?.setVisited(visited: true)
+                child?.isVisited = true
                 queue?.append(child!)
             }else{
                 queue?.removeFirst()
@@ -66,14 +55,14 @@ class BFSDFSSearch : NSObject{
     
     func dfs_search(root : Node) -> Void {
         var stack : Array<Node>?
-        root.setVisited(visited: true)
+        root.isVisited = true
         stack?.append(root)
         
         while stack?.count != 0 {
             let node = stack?.first
             let child = getAdjacentNode(aNode: node!)
             if (child != nil){
-                child?.setVisited(visited: true)
+                child?.isVisited = true
                 stack?.append(child!)
             }else{
                 stack?.removeLast()
@@ -86,9 +75,9 @@ class BFSDFSSearch : NSObject{
         var tmp : Node? = nil
         for arr in graghList! {
             let firstNode = (arr as? Array<Any>)?.first as? Node
-            if firstNode?.getNodeName() == aNode.getNodeName(){
+            if firstNode?.nodeName == aNode.nodeName{
                 for node in (arr as? Array<Any>)!  {
-                    if (node as? Node)?.getVisited() == false{
+                    if (node as? Node)?.isVisited == false{
                         tmp = node as? Node
                         break
                     }
@@ -102,7 +91,7 @@ class BFSDFSSearch : NSObject{
     func resetNodesData() -> Void {
         for arr in graghList! {
             for node in (arr as? Array<Any>)!  {
-                (node as? Node)?.setVisited(visited: false)
+                (node as? Node)?.isVisited = false
             }
         }
     }
